@@ -1,0 +1,101 @@
+# ------------------------------------------------------------
+# Resource Group Configuration
+# ------------------------------------------------------------
+resource_group_name     = "chanchal-rg"       # Name of the Azure Resource Group , yeh alag hona chahiyea agar do alag alag resources ya pipelione chla rahe hai to
+resource_group_location = "North Europe" # Azure region where all resources will be deployed
+
+# ------------------------------------------------------------
+# Virtual Network Configuration
+# ------------------------------------------------------------
+virtual_network_name          = "chanchal-vnet"      # Name of the Virtual Network (VNet)
+virtual_network_address_space = ["10.0.0.0/20"] # Address space range for the VNet
+
+# ------------------------------------------------------------
+# Subnets Configuration
+# ------------------------------------------------------------
+frontend_subnet_name     = "chanchal-frontend" # Name of the frontend subnet
+frontend_subnet_prefixes = ["10.0.1.0/24"]       # Address range for the frontend subnet
+
+backend_subnet_name     = "chanchal-backend" # Name of the backend subnet
+backend_subnet_prefixes = ["10.0.2.0/24"]      # Address range for the backend subnet
+
+# ------------------------------------------------------------
+# Frontend Public IP & NSG
+# ------------------------------------------------------------
+frontend_public_ip_name    = "chanchal-pip-frontend" # Public IP name for frontend VM
+frontend_nsg_name          = "chanchal-frontend-nsg" # Network Security Group for frontend
+frontend_nsg_allowed_ports = [22, 80]           # Allowed ports: SSH (22), HTTP (80)
+
+# ------------------------------------------------------------
+# Frontend NIC (Network Interface Card)
+# ------------------------------------------------------------
+frontend_nic_name           = "chanchal-nic-frontend"           # Name of frontend NIC
+frontend_nic_ip_config_name = "chanchal-nic-ip-config-frontend" # IP configuration name for frontend NIC
+
+# ------------------------------------------------------------
+# Frontend VM Configuration
+# ------------------------------------------------------------
+frontend_vm_name      = "chanchal-frontend"                     # VM Name
+frontend_vm_size      = "Standard_B1s"                 # VM Size (B-series)
+frontend_vm_publisher = "Canonical"                    # Image Publisher
+frontend_vm_offer     = "0001-com-ubuntu-server-jammy" # Image Offer
+frontend_vm_sku       = "22_04-lts"                    # SKU
+frontend_vm_version   = "latest"                       # Image Version
+
+# ------------------------------------------------------------
+# Backend Public IP & NSG
+# ------------------------------------------------------------
+backend_public_ip_name    = "chanchal-pip-backend" # Public IP name for backend VM
+backend_nsg_name          = "chanchal-backend-nsg" # NSG for backend
+backend_nsg_allowed_ports = [22, 8000]        # Allowed ports: SSH (22), App port (8000)
+
+# ------------------------------------------------------------
+# Backend NIC
+# ------------------------------------------------------------
+backend_nic_name           = "chanchal-nic-backend"           # Backend NIC name
+backend_nic_ip_config_name = "chanchal-nic-ip-config-backend" # IP config name
+
+# ------------------------------------------------------------
+# Backend VM Configuration
+# ------------------------------------------------------------
+backend_vm_name      = "chanchal-backend"                      # Backend VM name
+backend_vm_size      = "Standard_B1s"                 # Size
+backend_vm_publisher = "Canonical"                    # Image publisher
+backend_vm_offer     = "0001-com-ubuntu-server-focal" # Offer
+backend_vm_sku       = "20_04-lts"                    # SKU
+backend_vm_version   = "latest"                       # Version
+
+# ------------------------------------------------------------
+# Azure SQL Server & Database
+# ------------------------------------------------------------
+sql_server_name   = "chanchalserver" # Name of Azure SQL Server , yeh bhi alag hona chahiyea.. agar do alag alag pipelines chla rahe ho to...
+sql_database_name = "chanchal-database"  # SQL Database name
+
+# ------------------------------------------------------------
+# Azure Key Vault
+# ------------------------------------------------------------
+key_vault_name = "chanchal-key-vault-custom" # Name of Key Vault to store secrets , yeh error deta hai .. to har baar new bnana hai
+
+# ------------------------------------------------------------
+# Secrets for Frontend VM
+# ------------------------------------------------------------
+frontend_vm_admin_username_key   = "frontend-admin-username" # Key name in Key Vault
+frontend_vm_admin_username_value = "chanchal-frontend-custom"                # Username value
+frontend_vm_admin_password_key   = "frontend-admin-password" # Key name for password
+frontend_vm_admin_password_value = "chanchalcustom"            # Password value
+
+# ------------------------------------------------------------
+# Secrets for Backend VM
+# ------------------------------------------------------------
+backend_vm_admin_username_key   = "backendend-admin-username"
+backend_vm_admin_username_value = "chanchal-backend-custom"
+backend_vm_admin_password_key   = "backend-admin-password"
+backend_vm_admin_password_value = "chanchalcustom"
+
+# ------------------------------------------------------------
+# Secrets for SQL Server
+# ------------------------------------------------------------
+sql_server_admin_login_key      = "sql-server-admin-login-username"
+sql_server_admin_login_value    = "chanchal-server-custom"
+sql_server_admin_password_key   = "sql-server-admin-password"
+sql_server_admin_password_value = "chanchalcustom"
