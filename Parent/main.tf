@@ -30,14 +30,14 @@ module "backend_subnet" {
   depends_on           = [module.virtual_network]
 }
 
-module "frontend-public-ip" {
+module "frontend_public_ip" {
   source              = "../azurerm_public_ip"
   pip_name            = var.frontend_public_ip_name
   resource_group_name = module.resource_group.resource_group_name
   depends_on          = [module.resource_group]
 }
 
-module "frontend-network-security-group" {
+module "frontend_network_securitygroup" {
   source                      = "../azurerm_network_security_group"
   network_security_group_name = var.frontend_nsg_name
   resource_group_name         = module.resource_group.resource_group_name
@@ -57,7 +57,7 @@ module "frontend_network_interface" {
   depends_on                              = [module.frontend_subnet]
 }
 
-module "frontend-vm" {
+module "frontend_vm" {
   source                    = "../azurerm_linux_virtual_machine"
   vm_name                   = var.frontend_vm_name
   resource_group_name       = module.resource_group.resource_group_name
@@ -73,14 +73,14 @@ module "frontend-vm" {
   depends_on                = [module.frontend_network_interface, module.azurerm_key_vault_module, module.azurerm_key_vault_secrets_module]
 }
 
-module "backend-public-ip" {
+module "backend_public_ip" {
   source              = "../azurerm_public_ip"
   pip_name            = var.backend_public_ip_name
   resource_group_name = module.resource_group.resource_group_name
   depends_on          = [module.resource_group]
 }
 
-module "backend-network-security-group" {
+module "backend_network_securitygroup" {
   source                      = "../azurerm_network_security_group"
   network_security_group_name = var.backend_nsg_name
   resource_group_name         = module.resource_group.resource_group_name
@@ -100,7 +100,7 @@ module "backend_network_interface" {
   depends_on                              = [module.backend_subnet]
 }
 
-module "backend-vm" {
+module "backend_vm" {
   source                    = "../azurerm_linux_virtual_machine"
   vm_name                   = var.backend_vm_name
   resource_group_name       = module.resource_group.resource_group_name
